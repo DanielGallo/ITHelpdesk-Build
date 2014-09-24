@@ -1,4 +1,4 @@
-function _5e175b50c23e5e52dd190801068f1f9479ac8c62(){};//@tag foundation,core
+function _96b5fc7728d71ea9c6f0c34f93aee882c478d9c7(){};//@tag foundation,core
 //@define Ext
 
 /**
@@ -76241,7 +76241,7 @@ Ext.define('Helpdesk.controller.Ticket', {
             function (error) {
                 Ext.device.Notification.show({
                     title: 'Error',
-                    message: 'An error occurred trying to scan the barcode. Please try again.',
+                    message: 'An error occurred trying to scan the barcode. Please try again now.',
                     buttons: Ext.MessageBox.OK,
                     callback: function(button) {
                     }
