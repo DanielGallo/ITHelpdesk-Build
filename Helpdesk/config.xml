@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns   = "http://www.w3.org/ns/widgets"
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+        id          = "com.danielgallo.ithelpdesk"
+        version     = "1.0.0" >
+
+    <name>IT Helpdesk</name>
+
+    <description>
+        An example IT Helpdesk app, built using Sencha Touch, with push notification and barcode reader capabilities. 
+    </description>
+
+    <author href="http://www.danielgallo.co.uk" email="daniel.gallo@sencha.com">
+        Daniel Gallo
+    </author>
+
+    <preference name="phonegap-version" value="3.5.0" />
+
+    <gap:plugin name="com.phonegap.plugins.pushplugin" version="2.1.1" />
+    <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
+    <gap:plugin name="org.apache.cordova.vibration" version="0.3.7" />
+    <gap:plugin name="org.apache.cordova.dialogs" version="0.2.6" />
+    <gap:plugin name="org.apache.cordova.media" version="0.2.8" />
+    <gap:plugin name="com.phonegap.plugins.barcodescanner" version="1.1.0" />
+
+    <access origin="*" />
+</widget>
