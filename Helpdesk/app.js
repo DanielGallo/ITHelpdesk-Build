@@ -1,4 +1,4 @@
-function _3041b48a44c3fa26c27360497af8210599c105fb(){};//@tag foundation,core
+function _cb0bef7d3bd74850c8ecc80751e3f193db5f8439(){};//@tag foundation,core
 //@define Ext
 
 /**
@@ -76145,7 +76145,7 @@ Ext.define('Helpdesk.controller.Security', {
                         buttons: Ext.MessageBox.OKCANCEL,
                         callback: function(button) {
                             if (button === "ok") {
-                                var ticketController = Ext.app.Application.getController('Ticket');
+                                var ticketController = Helpdesk.app.getController('Ticket');
 
                                 ticketController.viewRecord(record);
                             }
