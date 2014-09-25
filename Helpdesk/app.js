@@ -1,4 +1,4 @@
-function _1b07a0445f6314aeac312c615d8822b80cdaff7c(){};//@tag foundation,core
+function _3041b48a44c3fa26c27360497af8210599c105fb(){};//@tag foundation,core
 //@define Ext
 
 /**
@@ -76122,30 +76122,42 @@ Ext.define('Helpdesk.controller.Security', {
                 console.log('Received notification');
                 console.log(event);
 
+
                 navigator.notification.vibrate();
 
-                if(event.alert) {
-                    //Ext.Msg.alert('Alert', event.alert);
 
+                var decodedRecord = Ext.JSON.decode(event.record),
+                    store = Ext.getStore('Tickets'),
+                    record = store.getById(event.id);
+
+                if (typeof record !== 'undefined') {
+                    //record = Ext.create('Helpdesk.model.Ticket', decodedRecord);
+                    record = store.add(decodedRecord)[0];
+                } else {
+                    record.setData(decodedRecord);
+                }
+
+
+                if(event.alert) {
                     Ext.device.Notification.show({
-                        title: 'New record',
-                        message: 'A new record has been added, would you like to view it?',
+                        title: event.alertTitle,
+                        message: event.alert,
                         buttons: Ext.MessageBox.OKCANCEL,
                         callback: function(button) {
                             if (button === "ok") {
-                                console.log('Yes');
-                            } else {
-                                console.log('No');
+                                var ticketController = Ext.app.Application.getController('Ticket');
+
+                                ticketController.viewRecord(record);
                             }
                         }
                     });
                 }
 
-                if(event.sound) {
+                /*if(event.sound) {
                     console.log('Play sound');
                     var snd = new Media('resources/short_double_low.mp3');
                     snd.play();
-                }
+                }*/
 
                 if(event.badge) {
                     console.log('Update badge');
@@ -76262,14 +76274,7 @@ Ext.define('Helpdesk.controller.Ticket', {
     },
 
     onListItemTap: function(dataview, index, target, record, e, eOpts) {
-        var mainView = this.getMainView(),
-            disabled = record.get('Closed');
-
-        mainView.push(Ext.create('Helpdesk.view.TicketForm', {
-            title: record.get('Title'),
-            record: record,
-            disabled: disabled
-        }));
+        this.viewRecord(record);
     },
 
     onScanBarcodeTap: function(button, e, eOpts) {
@@ -76366,6 +76371,18 @@ Ext.define('Helpdesk.controller.Ticket', {
 
     deleteRecord: function(form) {
 
+    },
+
+    viewRecord: function(record) {
+        var me = this,
+            mainView = me.getMainView(),
+            disabled = record.get('Closed');
+
+        mainView.push(Ext.create('Helpdesk.view.TicketForm', {
+            title: record.get('Title'),
+            record: record,
+            disabled: disabled
+        }));
     }
 
 });
